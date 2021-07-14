@@ -1,0 +1,73 @@
+apply plugin: "com.android.application"
+apply plugin: "kotlin-android"
+apply plugin: "kotlin-android-extensions"
+apply plugin: "androidx.navigation.safeargs.kotlin"
+apply plugin: "koin"
+
+import com.goobar.io.buildsrc.Deps
+
+android {
+    compileSdkVersion 29
+    buildToolsVersion "29.0.2"
+
+    defaultConfig {
+        applicationId "com.goobar.io.premiseweather"
+        minSdkVersion 21
+        targetSdkVersion 29
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    viewBinding {
+        enabled = true
+    }
+
+    compileOptions {
+        sourceCompatibility 1.8
+        targetCompatibility 1.8
+    }
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation Deps.kotlin.stdlib
+    implementation Deps.kotlin.coroutines.core
+
+    implementation Deps.retrofit.client
+    implementation Deps.retrofit.moshi
+
+    implementation Deps.koin.core.core
+    implementation Deps.koin.android.android
+    implementation Deps.koin.androidx.scope
+    implementation Deps.koin.androidx.viewModel
+    implementation Deps.koin.androidx.fragment
+
+    implementation Deps.androidx.appcompat
+    implementation Deps.androidx.core
+    implementation Deps.androidx.constraintLayout
+
+    implementation Deps.androidx.navigation.fragment
+    implementation Deps.androidx.navigation.ui
+
+    implementation Deps.material
+    implementation Deps.androidx.lifecycle.viewmodel
+    implementation Deps.androidx.lifecycle.extensions
+
+    implementation Deps.groupie.groupie
+
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.1'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+}
